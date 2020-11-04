@@ -52,7 +52,7 @@ INSERT INTO public.depencecy(
 	VALUES (4, 4, 0, 'Comp D','last son of A');
 INSERT INTO public.depencecy(
 	ancestor_id, descendant_id, depth, name, linking)
-	VALUES (5, 5, 0, 'Comp E'.'grandson of B');
+	VALUES (5, 5, 0, 'Comp E','grandson of B');
 INSERT INTO public.depencecy(
 	ancestor_id, descendant_id, depth, name, linking)
 	VALUES ( 6, 6, 0, 'Comp F','seond grandson of B');
