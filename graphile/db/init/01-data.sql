@@ -2,7 +2,7 @@
 
 /*Create some example components*/
 /*INSERT INTO public.component ...*/
-//TODO: complete insert statement
+/*TODO: complete insert statement*/
 INSERT INTO public.component(
 	id, name, version, packagen, lincese)
 	VALUES (1, 'Comp A', '1.0.0', 'org.a', 'MIT');
@@ -35,8 +35,8 @@ INSERT INTO public.component(
 	VALUES (10, 'Comp K', '1.0.0', 'org.k', 'unknown');
 
 /*Create some dependencies between components*/
-//INSERT INTO public.dependency ... 
-//TODO: complete insert statement
+/*INSERT INTO public.dependency ... 
+//TODO: complete insert statement*/
 INSERT INTO public.dependency(
 	ancestor_id, descendant_id, depth, name, linking)
 	VALUES (1, 1, 0, 'Comp A', 'this is root');
