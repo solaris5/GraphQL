@@ -12,7 +12,6 @@ create table public.dependency(
   ancestor_id integer not null,
   descendant_id integer not null,
   depth integer not null,
-  name text,
   linking text,
   primary key (ancestor_id,descendant_id),
   foreign key (ancestor_id) references public.component(id),
