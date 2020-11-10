@@ -38,33 +38,111 @@ INSERT INTO public.component(
 /*INSERT INTO public.dependency ... 
 //TODO: complete insert statement*/
 INSERT INTO public.dependency(
-	ancestor_id, descendant_id, depth, name, linking)
-	VALUES (1, 1, 0, 'Comp A', 'this is root');
+	ancestor_id, descendant_id, depth,linking)
+	VALUES (1, 1, 0,'Comp A is a root ');
+INSERT INTO public.dependency(
+	ancestor_id, descendant_id, depth,linking)
+	VALUES (1, 2, 1,'Comp A-Comp B');
+INSERT INTO public.dependency(
+	ancestor_id, descendant_id, depth,linking)
+	VALUES (1, 3, 1,'Comp A - Comp C');
+INSERT INTO public.dependency(
+	ancestor_id, descendant_id, depth,linking)
+	VALUES (1, 4, 1,'Comp A-Comp D');
+INSERT INTO public.dependency(
+	ancestor_id, descendant_id, depth,linking)
+	VALUES (1, 5, 2,'Comp A-Comp B-CompE');
+INSERT INTO public.dependency(
+	ancestor_id, descendant_id, depth,linking)
+	VALUES (1, 6, 2,' Comp A-Comp B-Comp F');
+INSERT INTO public.dependency(
+	ancestor_id, descendant_id, depth,linking)
+	VALUES (1, 7, 2,' Comp A-Comp C-Comp G');
+INSERT INTO public.dependency(
+	ancestor_id, descendant_id, depth,linking)
+	VALUES (1, 8, 2,' Comp A-Comp B-Comp H');
+INSERT INTO public.dependency(
+	ancestor_id, descendant_id, depth,linking)
+	VALUES (1, 9, 3,' Comp A-Comp B-Comp E-Comp I');
+INSERT INTO public.dependency(
+	ancestor_id, descendant_id, depth,linking)
+	VALUES (1, 10, 3,' Comp A-Comp B-Comp G-Comp K');
+INSERT INTO public.dependency(
+	ancestor_id, descendant_id, depth,linking)
+	VALUES (2, 2, 0,'this is Comp B leaf');
 
 INSERT INTO public.dependency(
-	ancestor_id, descendant_id, depth, name, linking)
-	VALUES (2, 2, 2, 'Comp B', 'father is root');
+	ancestor_id, descendant_id, depth,linking)
+	VALUES (2, 5, 1,'Comp B-Comp E');
 INSERT INTO public.dependency(
-	ancestor_id, descendant_id, depth, name, linking)
-	VALUES (3, 3, 0, 'Comp C','second son of Ａ');
+	ancestor_id, descendant_id, depth,linking)
+	VALUES (2, 6, 1,'Comp B-Comp F');
+
 INSERT INTO public.dependency(
-	ancestor_id, descendant_id, depth, name, linking)
-	VALUES (4, 4, 0, 'Comp D','last son of A');
+	ancestor_id, descendant_id, depth,linking)
+	VALUES (2, 9, 2,' Comp B-Comp E-Comp I');
+
 INSERT INTO public.dependency(
-	ancestor_id, descendant_id, depth, name, linking)
-	VALUES (5, 5, 0, 'Comp E','grandson of B');
+	ancestor_id, descendant_id, depth,linking)
+	VALUES (3, 3, 0,'this is Comp C leaf');
 INSERT INTO public.dependency(
-	ancestor_id, descendant_id, depth, name, linking)
-	VALUES ( 6, 6, 0, 'Comp F','seond grandson of B');
+	ancestor_id, descendant_id, depth,linking)
+	VALUES (3, 7, 1,' Comp A-Comp B-Comp G');
 INSERT INTO public.dependency(
-	ancestor_id, descendant_id, depth, name, linking)
-	VALUES (7, 7, 0, 'Comp G', 'grandson of C');
+	ancestor_id, descendant_id, depth,linking)
+	VALUES (3, 8, 1,' Comp A-Comp B-Comp H');
 INSERT INTO public.dependency(
-	ancestor_id, descendant_id, depth, name, linking)
-	VALUES (8, 8, 0, 'Comp H', 'last son of C');
+	ancestor_id, descendant_id, depth,linking)
+	VALUES (3, 10, 2,' Comp C-Comp G-Comp K');
+	
 INSERT INTO public.dependency(
-	ancestor_id, descendant_id, depth, name, linking)
-	VALUES (9, 9, 0, 'Comp I','one of last son' );
+	ancestor_id, descendant_id, depth,linking)
+	VALUES (4, 4, 0,'this is a Comp D leaf');
+	
 INSERT INTO public.dependency(
-	ancestor_id, descendant_id, depth, name, linking)
-	VALUES (10, 10, 0, 'Comp K', 'last son');
+	ancestor_id, descendant_id, depth,linking)
+	VALUES (5, 5, 0),'this is Com E leaf';
+INSERT INTO public.dependency(
+	ancestor_id, descendant_id, depth,linking)
+	VALUES (5, 9, 1,'Comp E-Comp I');
+
+INSERT INTO public.dependency(
+	ancestor_id, descendant_id, depth,linking)
+	VALUES (6, 6, 0,'this is Comp F');
+	
+INSERT INTO public.dependency(
+	ancestor_id, descendant_id, depth,linking)
+	VALUES (7, 7, 0,'this is Comp G');
+INSERT INTO public.dependency(
+	ancestor_id, descendant_id, depth,linking)
+	VALUES (7, 10, 1,'Comp G-Comp K');
+
+INSERT INTO public.dependency(
+	ancestor_id, descendant_id, depth,linking)
+	VALUES (8, 8, 0,'this is Comp H');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
