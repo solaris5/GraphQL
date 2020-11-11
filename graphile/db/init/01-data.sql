@@ -101,7 +101,7 @@ INSERT INTO public.dependency(
 	
 INSERT INTO public.dependency(
 	ancestor_id, descendant_id, depth,linking)
-	VALUES (5, 5, 0),'this is Com E leaf';
+	VALUES (5, 5, 0,'this is Com E leaf');
 INSERT INTO public.dependency(
 	ancestor_id, descendant_id, depth,linking)
 	VALUES (5, 9, 1,'Comp E-Comp I');
