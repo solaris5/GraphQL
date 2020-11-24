@@ -1,0 +1,52 @@
+query ComponentInfo{
+  componentById(id:3){
+    name
+#  ...on Component{
+     dependencies1:
+     dependenciesByAncestorId{
+     totalCount
+      nodes{
+        dependencies1:  componentByDescendantId{
+         name
+           dependencies1:
+     dependenciesByAncestorId{
+     totalCount
+      nodes{
+        dependencies1:  componentByDescendantId{
+         name
+          
+        
+         }
+      }
+  }
+          
+        
+         }
+      }
+ #   }
+   }
+     
+ #   ...on Component{
+      dependencies2:
+      dependenciesByDescendantId{
+      totalCount
+        nodes{
+        dependencies2:  componentByAncestorId{
+          name
+          dependencies2:
+            dependenciesByDescendantId{
+             totalCount
+             nodes{
+                  dependencies2:  componentByAncestorId{
+                   name
+    
+        } 
+      }
+    }
+    
+        } 
+      }
+    }
+ #   }
+  }
+}
