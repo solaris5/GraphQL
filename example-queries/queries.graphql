@@ -1,19 +1,18 @@
 query ComponentInfo{
   componentById(id:3){
     name
-#  ...on Component{
-     dependencies1:
-     dependenciesByAncestorId{
-     totalCount
-      nodes{
-        dependencies1:  componentByDescendantId{
-         name
-           dependencies1:
-     dependenciesByAncestorId{
-     totalCount
-      nodes{
-        dependencies1:  componentByDescendantId{
-         name
+    dependencies1:
+       dependenciesByAncestorId{
+           totalCount
+           nodes{
+                dependencies1:  componentByDescendantId{
+                         name
+                         dependencies1:
+                           dependenciesByAncestorId{
+                                totalCount
+                                   nodes{
+                                     dependencies1:  componentByDescendantId{
+                                        name
           
         
          }
@@ -23,22 +22,21 @@ query ComponentInfo{
         
          }
       }
- #   }
+ 
    }
      
- #   ...on Component{
-      dependencies2:
+  dependencies2:
       dependenciesByDescendantId{
-      totalCount
-        nodes{
-        dependencies2:  componentByAncestorId{
-          name
-          dependencies2:
-            dependenciesByDescendantId{
-             totalCount
-             nodes{
-                  dependencies2:  componentByAncestorId{
+         totalCount
+            nodes{
+              dependencies2:  componentByAncestorId{
                    name
+                   dependencies2:
+                      dependenciesByDescendantId{
+                       totalCount
+                       nodes{
+                         dependencies2:  componentByAncestorId{
+                             name
     
         } 
       }
@@ -47,6 +45,6 @@ query ComponentInfo{
         } 
       }
     }
- #   }
+
   }
 }
