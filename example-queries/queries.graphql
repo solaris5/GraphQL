@@ -1,50 +1,136 @@
-query ComponentInfo{
-  componentById(id:3){
+//1 Query: zeige die complete Graph mit abhängigkeit
+query fristQuery{
+ allDependencies{
+  nodes{
+  info:componentByDescendantId{
+    id
     name
-    dependencies1:
-       dependenciesByAncestorId{
-           totalCount
-           nodes{
-                dependencies1:  componentByDescendantId{
-                         name
-                         dependencies1:
-                           dependenciesByAncestorId{
-                                totalCount
-                                   nodes{
-                                     dependencies1:  componentByDescendantId{
-                                        name
-          
-        
-         }
-      }
+    license
+    dependencies:dependenciesByAncestorId{
+      nodes{dependencies:componentByDescendantId{
+      id
+      name
+      license
+      }}
+    }
+    
   }
-          
-        
-         }
-      }
- 
-   }
-     
-  dependencies2:
-      dependenciesByDescendantId{
-         totalCount
-            nodes{
-              dependencies2:  componentByAncestorId{
-                   name
-                   dependencies2:
-                      dependenciesByDescendantId{
-                       totalCount
-                       nodes{
-                         dependencies2:  componentByAncestorId{
-                             name
-    
-        } 
-      }
-    }
-    
-        } 
-      }
-    }
-
   }
 }
+}
+//2 Query: zeigt die component mit id= 3, auch dazugehörige abhängigkeit
+query secondeQuery{
+  componentById(id:3){
+     name
+     dependencies:
+      dependenciesByAncestorId {
+        totalCount
+      nodes{
+      depnendencies: componentByDescendantId{
+            name
+          }
+        }
+      
+     }
+  }
+}
+  
+//3.CRUD-Option, create
+//Create component mit id =11, name= "Comp Q" in component-tablle und depenndecy-tabelle
+mutation thirdQuery{
+  createComponent(input:{component:{
+  id:11,
+  name:"Comp Q",license:"MIT",version:"1.0.0",package:"org.q"
+}}){component{
+    id
+    name
+    license
+    version
+    package
+}}
+  
+ 
+createDependency(input:{dependency:{
+  ancestorId:8,
+  descendantId:11,
+  depth:3
+  linking:"Comp H-Comp Q"
+}}){dependency{
+  ancestorId
+  descendantId
+  depth
+  linking
+  
+}}
+
+createDependency(input:{dependency:{
+  ancestorId:1,
+  descendantId:11,
+  depth:4
+  linking:"Comp A-Comp Q"
+}}){dependency{
+  ancestorId
+  descendantId
+  depth
+  linking
+  
+}}
+}
+//testen thirdQuery
+query resultCreat{
+  componentById(id:11){
+    name
+    license
+    package
+    version
+     dependencies1:dependenciesByAncestorId {
+        totalCount
+      nodes{
+      depnendencies: componentByDescendantId{
+            name
+          }
+        }
+      
+      }
+    dependencies2:dependenciesByDescendantId{
+      totalCount
+      nodes{
+        componentByAncestorId{
+          name
+         license
+         package
+         version
+        }
+      }
+    }
+ 
+}
+}
+
+
+
+
+//update-Opetion: verändert id=11 , die name = comp Q nach name = Comp X verändern
+  mutation fourQuery{
+  updateDependencyByAncestorIdAndDescendantId(
+    input:{
+    ancestorId:8
+    dependencyPatch:{
+      ancestorId:10
+      descendantId:11
+      depth:4
+      linking:"CompK-CompQ"
+    }
+    
+    }){
+    dependency{
+      componentByDescendantId{
+        id
+       name
+      
+      }}
+  }
+}
+
+//delet id =11 ,mit der Name = Comp X
+// um die component zu löschen, sollte in der Dependency-Tablle , die pfad descendant_id =11 löschen
