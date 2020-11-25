@@ -134,3 +134,45 @@ query resultCreat{
 
 //delet id =11 ,mit der Name = Comp X
 // um die component zu löschen, sollte in der Dependency-Tablle , die pfad descendant_id =11 löschen
+//1. zuerst die Pfad (8,11),(1,11) in der Dependency-Tabelle delete(wegen ancestorId, descendant_id als forgin key references on component_id)
+//2. dann id =11 in der Component-Tabelle delelte
+
+mutation MyMutation {
+  
+  deleteDependencyByAncestorIdAndDescendantId(input: {ancestorId:8, descendantId: 11}) {
+    componentByDescendantId {
+      id
+      license
+      name
+    }
+  }
+}
+
+mutation MyMutation {
+  
+  deleteDependencyByAncestorIdAndDescendantId(input: {ancestorId:1, descendantId: 11}) {
+    componentByDescendantId {
+      id
+      license
+      name
+    }
+  }
+}
+
+
+mutation delete {
+  deleteComponentById (input:{id:11}){
+    component{id name}
+  }
+}
+
+//testen original componente Graph
+query original {
+  allComponents {
+    nodes {
+      id
+      license
+      name
+    }
+  }
+}
