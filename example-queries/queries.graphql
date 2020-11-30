@@ -85,14 +85,13 @@ mutation thirdQuery{
     version
     package
 }}
-  
- 
+}
 
 mutation thirdQuery3{
   createDependency(input:{dependency:{
   ancestorId:8,
   descendantId:11,
-  depth:3
+  depth:2
   linking:"DYNAMIC_LINKED"
 }}){dependency{
   ancestorId
@@ -107,7 +106,7 @@ mutation thirdQuery3{
   createDependency(input:{dependency:{
   ancestorId:1,
   descendantId:11,
-  depth:4
+  depth:3
   linking:"DYNAMIC_LINKED"
 }}){dependency{
   ancestorId
@@ -151,24 +150,16 @@ query resultCreate{
 
 # Update-Operation: mutate component with id=11. Change the components name from 'Comp Q' to 'Comp X'
   mutation fourQuery{
-  updateDependencyByAncestorIdAndDescendantId(
-    input:{
-    ancestorId:8
-    dependencyPatch:{
-      ancestorId:10
-      descendantId:11
-      depth:4
-      linking:"DYNAMIC_LINKED"
-    }
-    
-    }){
-    dependency{
-      componentByDescendantId{
-        id
-       name
-      
-      }}
+    updateComponentById(
+    input:{id:11,componentPatch:{name:"Comp X"}}
+  ){component{
+    id
+    name
+  
   }
+  }
+
+
 }
 
 
