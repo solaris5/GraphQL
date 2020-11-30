@@ -19,6 +19,29 @@ query firstQuery {
     }
   }
 }
+#1.1 1 Query: returns the complete component graph with 2 dependeiceslayout
+query firstQuery{
+ allDependencies{
+  nodes{
+  info:componentByDescendantId{
+    id
+    name
+    license
+    dependencies1:dependenciesByAncestorId(filter: {depth: {greaterThan: 0}}){
+      nodes{dependencies1:componentByDescendantId{
+      id
+      name
+      license
+        dependencies2:dependenciesByAncestorId(filter: {depth: {greaterThan: 0}}){
+          nodes{dependencies2:componentByDescendantId{id name license}}
+        }
+      }}
+    }
+    
+  }
+  }
+}
+}
 
 
 # 2 Query: returns component with id= 3 and all of its dependencies
