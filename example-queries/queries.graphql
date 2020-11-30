@@ -1,5 +1,5 @@
-//1 Query: zeige die complete Graph mit abhängigkeit
-query fristQuery{
+# 1 Query: returns the complete component graph
+query firstQuery{
  allDependencies{
   nodes{
   info:componentByDescendantId{
@@ -18,7 +18,8 @@ query fristQuery{
   }
 }
 }
-//2 Query: zeigt die component mit id= 3, auch dazugehörige abhängigkeit
+
+# 2 Query: returns component with id= 3 and all of its dependencies
 query secondeQuery{
   componentById(id:3){
      name
@@ -26,7 +27,7 @@ query secondeQuery{
       dependenciesByAncestorId {
         totalCount
       nodes{
-      depnendencies: componentByDescendantId{
+      dependencies: componentByDescendantId{
             name
           }
         }
@@ -35,8 +36,8 @@ query secondeQuery{
   }
 }
   
-//3.CRUD-Option, create
-//Create component mit id =11, name= "Comp Q" in component-tablle und depenndecy-tabelle
+# 3 CRUD-Operation create
+# Create component with id 11 and name "Comp Q"
 mutation thirdQuery{
   createComponent(input:{component:{
   id:11,
@@ -76,8 +77,9 @@ createDependency(input:{dependency:{
   
 }}
 }
-//testen thirdQuery
-query resultCreat{
+
+# test thirdQuery
+query resultCreate{
   componentById(id:11){
     name
     license
@@ -86,7 +88,7 @@ query resultCreat{
      dependencies1:dependenciesByAncestorId {
         totalCount
       nodes{
-      depnendencies: componentByDescendantId{
+      dependencies: componentByDescendantId{
             name
           }
         }
@@ -107,10 +109,7 @@ query resultCreat{
 }
 }
 
-
-
-
-//update-Opetion: verändert id=11 , die name = comp Q nach name = Comp X verändern
+# Update-Operation: mutate component with id=11. Change the components name from 'Comp Q' to 'Comp X'
   mutation fourQuery{
   updateDependencyByAncestorIdAndDescendantId(
     input:{
@@ -132,11 +131,16 @@ query resultCreat{
   }
 }
 
+<<<<<<< HEAD
 //delet id =11 ,mit der Name = Comp X
 // um die component zu loeschen, sollte in der Dependency-Tablle , die pfad descendant_id =11 löschen
 //1. zuerst die Pfad (8,11),(1,11) in der Dependency-Tabelle delete(wegen ancestorId, descendant_id als forgin key references on component_id)
 //2. dann id =11 in der Component-Tabelle delelte
 
+=======
+# Delete component with id =11 (Comp X)
+# Before the component can be deleted all of its dependencies in the dependency table have to be deleted first.
+>>>>>>> 9afccff5657267631bb606683d528f3be371904e
 mutation MyMutation {
   
   deleteDependencyByAncestorIdAndDescendantId(input: {ancestorId:8, descendantId: 11}) {
@@ -159,14 +163,21 @@ mutation MyMutation {
   }
 }
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9afccff5657267631bb606683d528f3be371904e
 mutation delete {
   deleteComponentById (input:{id:11}){
     component{id name}
   }
 }
 
+<<<<<<< HEAD
 //testen original componente Graph
+=======
+# test original component graph
+>>>>>>> 9afccff5657267631bb606683d528f3be371904e
 query original {
   allComponents {
     nodes {
@@ -175,4 +186,8 @@ query original {
       name
     }
   }
+<<<<<<< HEAD
 }
+=======
+}
+>>>>>>> 9afccff5657267631bb606683d528f3be371904e
