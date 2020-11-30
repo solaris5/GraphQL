@@ -48,18 +48,29 @@ query firstQuery{
 query secondeQuery{
   componentById(id:3){
      name
-     dependencies:
-      dependenciesByAncestorId {
+     dependencies1:
+      dependenciesByAncestorId(filter: {depth: {greaterThan: 0}}) {
         totalCount
-      nodes{
-      dependencies: componentByDescendantId{
+        nodes{
+        dependencies1: componentByDescendantId{
             name
+           dependencies2:
+           dependenciesByAncestorId(filter: {depth: {greaterThan: 0}}) {
+          totalCount
+            nodes{
+              dependencies2: componentByDescendantId{
+                name
+              }
+            }
+        
           }
         }
       
      }
   }
 }
+}
+  
   
 # 3 CRUD-Operation create
 # Create component with id 11 and name "Comp Q"
@@ -76,7 +87,9 @@ mutation thirdQuery{
 }}
   
  
-createDependency(input:{dependency:{
+
+mutation thirdQuery3{
+  createDependency(input:{dependency:{
   ancestorId:8,
   descendantId:11,
   depth:3
@@ -88,8 +101,10 @@ createDependency(input:{dependency:{
   linking
   
 }}
+}
 
-createDependency(input:{dependency:{
+mutation thirdQuery3{
+  createDependency(input:{dependency:{
   ancestorId:1,
   descendantId:11,
   depth:4
