@@ -55,7 +55,7 @@ createDependency(input:{dependency:{
   ancestorId:8,
   descendantId:11,
   depth:3
-  linking:"Comp H-Comp Q"
+  linking:"DYNAMIC_LINKED"
 }}){dependency{
   ancestorId
   descendantId
@@ -68,7 +68,7 @@ createDependency(input:{dependency:{
   ancestorId:1,
   descendantId:11,
   depth:4
-  linking:"Comp A-Comp Q"
+  linking:"DYNAMIC_LINKED"
 }}){dependency{
   ancestorId
   descendantId
@@ -118,7 +118,7 @@ query resultCreate{
       ancestorId:10
       descendantId:11
       depth:4
-      linking:"CompK-CompQ"
+      linking:"DYNAMIC_LINKED"
     }
     
     }){
