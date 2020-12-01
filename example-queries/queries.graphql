@@ -6,7 +6,9 @@ query firstQuery {
         id
         name
         license
-        dependencies1: dependenciesByAncestorId(filter: {depth: {greaterThan: 0}}) {
+        dependencies1: dependenciesByAncestorId(
+          filter: { depth: { greaterThan: 0 } }
+        ) {
           nodes {
             dependencies1: componentByDescendantId {
               id
@@ -19,156 +21,178 @@ query firstQuery {
     }
   }
 }
-#1.1 1 Query: returns the complete component graph with 2 dependeiceslayout
-query firstQuery{
- allDependencies{
-  nodes{
-  info:componentByDescendantId{
-    id
-    name
-    license
-    dependencies1:dependenciesByAncestorId(filter: {depth: {greaterThan: 0}}){
-      nodes{dependencies1:componentByDescendantId{
-      id
-      name
-      license
-        dependencies2:dependenciesByAncestorId(filter: {depth: {greaterThan: 0}}){
-          nodes{dependencies2:componentByDescendantId{id name license}}
-        }
-      }}
-    }
-    
-  }
-  }
-}
-}
 
+#1.1 1 Query: returns the complete component graph with 2 dependeiceslayout
+query firstQuery {
+  allDependencies {
+    nodes {
+      info: componentByDescendantId {
+        id
+        name
+        license
+        dependencies1: dependenciesByAncestorId(
+          filter: { depth: { greaterThan: 0 } }
+        ) {
+          nodes {
+            dependencies1: componentByDescendantId {
+              id
+              name
+              license
+              dependencies2: dependenciesByAncestorId(
+                filter: { depth: { greaterThan: 0 } }
+              ) {
+                nodes {
+                  dependencies2: componentByDescendantId {
+                    id
+                    name
+                    license
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
 
 # 2 Query: returns component with id= 3 and all of its dependencies
-query secondeQuery{
-  componentById(id:3){
-     name
-     dependencies1:
-      dependenciesByAncestorId(filter: {depth: {greaterThan: 0}}) {
-        totalCount
-        nodes{
-        dependencies1: componentByDescendantId{
-            name
-           dependencies2:
-           dependenciesByAncestorId(filter: {depth: {greaterThan: 0}}) {
-          totalCount
-            nodes{
-              dependencies2: componentByDescendantId{
+query secondeQuery {
+  componentById(id: 3) {
+    name
+    dependencies1: dependenciesByAncestorId(
+      filter: { depth: { greaterThan: 0 } }
+    ) {
+      totalCount
+      nodes {
+        dependencies1: componentByDescendantId {
+          name
+          dependencies2: dependenciesByAncestorId(
+            filter: { depth: { greaterThan: 0 } }
+          ) {
+            totalCount
+            nodes {
+              dependencies2: componentByDescendantId {
                 name
               }
             }
-        
           }
-        }
-      
-     }
-  }
-}
-}
-  
-  
-# 3 CRUD-Operation create
-# Create component with id 11 and name "Comp Q"
-mutation thirdQuery{
-  createComponent(input:{component:{
-  id:11,
-  name:"Comp Q",license:"MIT",version:"1.0.0",package:"org.q"
-}}){component{
-    id
-    name
-    license
-    version
-    package
-}}
-}
-
-mutation thirdQuery3{
-  createDependency(input:{dependency:{
-  ancestorId:8,
-  descendantId:11,
-  depth:2
-  linking:"DYNAMIC_LINKED"
-}}){dependency{
-  ancestorId
-  descendantId
-  depth
-  linking
-  
-}}
-}
-
-mutation thirdQuery3{
-  createDependency(input:{dependency:{
-  ancestorId:1,
-  descendantId:11,
-  depth:3
-  linking:"DYNAMIC_LINKED"
-}}){dependency{
-  ancestorId
-  descendantId
-  depth
-  linking
-  
-}}
-}
-
-# test thirdQuery
-query resultCreate{
-  componentById(id:11){
-    name
-    license
-    package
-    version
-     dependencies1:dependenciesByAncestorId {
-        totalCount
-      nodes{
-      dependencies: componentByDescendantId{
-            name
-          }
-        }
-      
-      }
-    dependencies2:dependenciesByDescendantId{
-      totalCount
-      nodes{
-        componentByAncestorId{
-          name
-         license
-         package
-         version
         }
       }
     }
- 
+  }
 }
+
+# 3 CRUD-Operation create
+# Create component with id 11 and name "Comp Q"
+mutation thirdQuery {
+  createComponent(
+    input: {
+      component: {
+        id: 11
+        name: "Comp Q"
+        license: "MIT"
+        version: "1.0.0"
+        package: "org.q"
+      }
+    }
+  ) {
+    component {
+      id
+      name
+      license
+      version
+      package
+    }
+  }
+}
+
+mutation thirdQuery3 {
+  createDependency(
+    input: {
+      dependency: {
+        ancestorId: 8
+        descendantId: 11
+        depth: 2
+        linking: "DYNAMIC_LINKED"
+      }
+    }
+  ) {
+    dependency {
+      ancestorId
+      descendantId
+      depth
+      linking
+    }
+  }
+}
+
+mutation thirdQuery3 {
+  createDependency(
+    input: {
+      dependency: {
+        ancestorId: 1
+        descendantId: 11
+        depth: 3
+        linking: "DYNAMIC_LINKED"
+      }
+    }
+  ) {
+    dependency {
+      ancestorId
+      descendantId
+      depth
+      linking
+    }
+  }
+}
+
+# test thirdQuery
+query resultCreate {
+  componentById(id: 11) {
+    name
+    license
+    package
+    version
+    dependencies1: dependenciesByAncestorId {
+      totalCount
+      nodes {
+        dependencies: componentByDescendantId {
+          name
+        }
+      }
+    }
+    dependencies2: dependenciesByDescendantId {
+      totalCount
+      nodes {
+        componentByAncestorId {
+          name
+          license
+          package
+          version
+        }
+      }
+    }
+  }
 }
 
 # Update-Operation: mutate component with id=11. Change the components name from 'Comp Q' to 'Comp X'
-  mutation fourQuery{
-    updateComponentById(
-    input:{id:11,componentPatch:{name:"Comp X"}}
-  ){component{
-    id
-    name
-  
+mutation fourQuery {
+  updateComponentById(input: { id: 11, componentPatch: { name: "Comp X" } }) {
+    component {
+      id
+      name
+    }
   }
-  }
-
-
 }
-
-
 
 # Delete component with id =11 (Comp X)
 # Before the component can be deleted all of its dependencies in the dependency table have to be deleted first.
 mutation MyMutation {
-  
-  deleteDependencyByAncestorIdAndDescendantId(input: {ancestorId:8, descendantId: 11}) {
+  deleteDependencyByAncestorIdAndDescendantId(
+    input: { ancestorId: 8, descendantId: 11 }
+  ) {
     componentByDescendantId {
       id
       license
@@ -178,8 +202,9 @@ mutation MyMutation {
 }
 
 mutation MyMutation {
-  
-  deleteDependencyByAncestorIdAndDescendantId(input: {ancestorId:1, descendantId: 11}) {
+  deleteDependencyByAncestorIdAndDescendantId(
+    input: { ancestorId: 1, descendantId: 11 }
+  ) {
     componentByDescendantId {
       id
       license
@@ -189,8 +214,11 @@ mutation MyMutation {
 }
 
 mutation delete {
-  deleteComponentById (input:{id:11}){
-    component{id name}
+  deleteComponentById(input: { id: 11 }) {
+    component {
+      id
+      name
+    }
   }
 }
 
